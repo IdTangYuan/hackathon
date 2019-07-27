@@ -1,0 +1,32 @@
+				"eyegaze":  {
+					"right_eye_gaze":  {
+						"position_x_coordinate":  0.322,
+						"vector_z_component":  0.564,
+						"vector_x_component":  -0.69,
+						"vector_y_component":  -0.453,
+						"position_y_coordinate":  0.199
+                    },
+                     "left_eye_gaze":  {
+                        "position_x_coordinate":  0.606,
+                         "vector_z_component":  0.733,
+                         "vector_x_component":  0.648,
+                         "vector_y_component":  0.206,
+                         "position_y_coordinate":  0.481
+                    }
+                }
+                "eyegaze":  {
+                    "right_eye_gaze":  {
+                        "position_x_coordinate":  0.452,
+                         "vector_z_component":  0.981,
+                         "vector_x_component":  -0.154,
+                         "vector_y_component":  0.116,
+                         "position_y_coordinate":  0.445
+                    },
+                     "left_eye_gaze":  {
+                        "position_x_coordinate":  0.513,
+                         "vector_z_component":  0.972,
+                         "vector_x_component":  0.117,
+                         "vector_y_component":  0.202,
+                         "position_y_coordinate":  0.482
+                    }
+                }
