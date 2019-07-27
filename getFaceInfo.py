@@ -57,7 +57,7 @@ def getFaceInfo(filePath):
         qrcont = resp.read()
         # if you want to load as json, you should decode first,
         # for example: json.loads(qrount.decode('utf-8'))
-        print(qrcont.decode('utf-8'))
+        # print(qrcont.decode('utf-8'))
         return qrcont.decode('utf-8')
     except urllib.error.HTTPError as e:
         print(e.read().decode('utf-8'))
@@ -76,16 +76,16 @@ def getGazeInfo(FaceInfo):
                  'y': rightEyeGaze['vector_y_component'], 'z': rightEyeGaze['vector_z_component']}
     leftInfo = {'x': leftEyeGaze['vector_x_component'],
                 'y': leftEyeGaze['vector_y_component'], 'z': leftEyeGaze['vector_z_component']}
-    print("right eye gaze :", rightInfo)
-    print("left eye gaze :", leftInfo)
+    # print("right eye gaze :", rightInfo)
+    # print("left eye gaze :", leftInfo)
     return leftInfo, rightInfo
 
 
 def isTowards(leftInfo, rightInfo):
     leftAngle = getAngle3D(leftInfo)
     rightAngle = getAngle3D(rightInfo)
-    print("left Angle Tangent2 : ", leftAngle)
-    print("right Angle Tangent2 : ", rightAngle)
+    # print("left Angle Tangent2 : ", leftAngle)
+    # print("right Angle Tangent2 : ", rightAngle)
     if(leftAngle < 1 and rightAngle < 1):
         return True
     else:
@@ -100,7 +100,7 @@ def getAngle3D(vector):
 
 
 if __name__ == '__main__':
-    FaceInfoFalse = """
+    FaceInfoCorrect = """
 {
     "time_used":  1498,
      "faces":  [
@@ -554,7 +554,7 @@ if __name__ == '__main__':
 }
 
     """
-    FaceInfoCorrect = """
+    FaceInfoFalse = """
     {
     "time_used":  1530,
      "faces":  

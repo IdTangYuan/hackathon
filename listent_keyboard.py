@@ -1,4 +1,5 @@
 from pynput.keyboard import Key, Listener
+import socket
 
 
 def on_press(key):
@@ -16,6 +17,7 @@ def on_release(key):
         return False
 
 
-# 连接事件以及释放
-with Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
+if __name__ == '__main__':
+    # 连接事件以及释放
+    with Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join()
