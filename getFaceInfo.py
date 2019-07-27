@@ -82,11 +82,12 @@ def getGazeInfo(FaceInfo):
 
 
 def isTowards(leftInfo, rightInfo):
+    threshold = 0.8
     leftAngle = getAngle3D(leftInfo)
     rightAngle = getAngle3D(rightInfo)
     # print("left Angle Tangent2 : ", leftAngle)
     # print("right Angle Tangent2 : ", rightAngle)
-    if(leftAngle < 1 and rightAngle < 1):
+    if(leftAngle < threshold and rightAngle < threshold):
         return True
     else:
         return False

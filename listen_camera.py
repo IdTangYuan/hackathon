@@ -1,6 +1,9 @@
 import cv2
+import socket
 from getFaceInfo import *
 filePath = "./catch.jpg"
+host = "192.168.0.116"
+port = 5051
 
 
 def checkChangeTarget():
@@ -12,6 +15,8 @@ def checkChangeTarget():
 
 
 if __name__ == '__main__':
+    s = socket.socket()
+    s.connect((host, port))
     camera = cv2.VideoCapture(0)
     count = 0
     check = True
@@ -19,16 +24,19 @@ if __name__ == '__main__':
         ret, frame = camera.read()
         cv2.imshow("video", frame)
         count += 1
-        if count == 60:
+        if count == 30:
             cv2.imwrite(filePath, frame)
             count = 0
             check = checkChangeTarget()
-        if check:
-            # TODO : send socket to controller
-            pass
+            if check:
+                s.send(b"a")
+            else:
+                s.send(b"s")
+
         if(cv2.waitKey(10) & 0xff == ord('q')):
             break
 
+    s.close()
     camera.release()
     cv2.destroyAllWindows()
     # checkChangeTarget()
