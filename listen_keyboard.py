@@ -5,7 +5,8 @@ import re
 
 localHost = "10.64.83.186"
 transferHost = "10.64.83.186"
-port = 5051
+receivePort = 5051
+sendPort = 5052
 
 transferSocket = socket.socket()
 transferSocket.connect((transferHost, port))
