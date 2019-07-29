@@ -16,5 +16,8 @@ time.sleep(1)
 keyboard.press(Key.enter)
 keyboard.release(Key.enter)
 
+
 time.sleep(1)
 keyboard.type('asdadq')
+keyboard.press(Key.space)
+keyboard.release(Key.space)
