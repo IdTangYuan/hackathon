@@ -6,15 +6,15 @@ import re
 localHost = "10.64.83.186"
 transferHost = "10.64.83.186"
 receivePort = 5051
-sendPort = 5052
+transferPort = 5052
 
 transferSocket = socket.socket()
-transferSocket.connect((transferHost, port))
+transferSocket.connect((transferHost, transferPort))
 
 
 def receive(port):
     receiveSocker = socket.socket()
-    receiveSocker.bind((localHost, port))
+    receiveSocker.bind((localHost, receivePort))
     receiveSocker.listen(5)
     while True:
         c, addr = receiveSocker.accept()
