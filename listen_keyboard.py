@@ -6,7 +6,7 @@ import re
 localHost = "10.64.83.186"
 transferHost = "10.64.83.186"
 receivePort = 5051
-transferPort = 5052
+transferPort = 5053
 
 receiveSocket = socket.socket()
 receiveSocket.bind((localHost, receivePort))
@@ -17,9 +17,8 @@ transferSocket.connect((transferHost, transferPort))
 def receive():
     c, addr = receiveSocket.accept()
     while True:
-        transferHost = c.recv(20)
+        transferHost = c.recv(20).decode()
         print(transferHost)
-
 
 def on_press(key):
     key = str(key).encode()
