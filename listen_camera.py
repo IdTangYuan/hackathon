@@ -34,9 +34,7 @@ if __name__ == '__main__':
             count = 0
             check = checkChangeTarget()
             if check:
-                s.send(b"True")
-            else:
-                s.send(b"esc")
+                s.send(b"10.64.83.186")
 
         if(cv2.waitKey(10) & 0xff == ord('q')):
             break
