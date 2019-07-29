@@ -7,11 +7,16 @@ port = 5051
 
 
 def checkChangeTarget():
-    faceInfo = getFaceInfo(filePath)
-    leftInfo, rightInfo = getGazeInfo(faceInfo)
-    result = isTowards(leftInfo, rightInfo)
-    print("Result : ", result)
-    return result
+    try:
+        faceInfo = getFaceInfo(filePath)
+        leftInfo, rightInfo = getGazeInfo(faceInfo)
+        result = isTowards(leftInfo, rightInfo)
+        print("Result : ", result)
+        return result
+    except Exception as e:
+        raise
+    else:
+        return False
 
 
 if __name__ == '__main__':
@@ -29,9 +34,9 @@ if __name__ == '__main__':
             count = 0
             check = checkChangeTarget()
             if check:
-                s.send(b"a")
+                s.send(b"True")
             else:
-                s.send(b"s")
+                s.send(b"esc")
 
         if(cv2.waitKey(10) & 0xff == ord('q')):
             break
