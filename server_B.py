@@ -1,5 +1,5 @@
 import socket
-host = "10.64.83.12"
+host = "10.64.83.186"
 port = 5053
 
 if __name__ == '__main__':
