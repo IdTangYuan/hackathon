@@ -3,7 +3,7 @@ import socket
 from getFaceInfo import *
 filePath = "./catch.jpg"
 host = "10.64.83.186"
-port = 5051
+port = 5052
 
 
 def checkChangeTarget():
