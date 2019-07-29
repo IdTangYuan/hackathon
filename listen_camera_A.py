@@ -1,6 +1,7 @@
 import cv2
 import socket
 from getFaceInfo import *
+from pynput.keyboard import Key, Controller
 filePath = "./catch.jpg"
 host = "10.64.83.12"
 port = 5051
