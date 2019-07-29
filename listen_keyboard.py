@@ -4,31 +4,41 @@ import threading
 import re
 
 localHost = "10.64.83.186"
-transferHost = "10.64.83.186"
-receivePort = 5051
+transferHost1 = "10.64.83.186"
+transferHost2 = "10.64.83.12"
+receivePort1 = 5051
+receivePort2 = 5052
 transferPort = 5053
+receiveSocket = [None]*2
+transferSocket = [None]*2
+target = 0
 
-receiveSocket = socket.socket()
-receiveSocket.bind((localHost, receivePort))
-receiveSocket.listen(5)
-transferSocket = socket.socket()
-transferSocket.connect((transferHost, transferPort))
+receiveSocket[0] = socket.socket()
+receiveSocket[0].bind((localHost, receivePort1))
+receiveSocket[0].listen(5)
+receiveSocket[1] = socket.socket()
+receiveSocket[1].bind((localHost, receivePort2))
+receiveSocket[1].listen(5)
+transferSocket[0] = socket.socket()
+transferSocket[0].connect((transferHost1, transferPort))
+transferSocket[1] = socket.socket()
+transferSocket[1].connect((transferHost2, transferPort))
 
-def receive():
-    global transferHost
-    c, addr = receiveSocket.accept()
+def receive(number):
+    global target
+    global receiveSocket
+    c, addr = receiveSocket[number].accept()
     while True:
-        new_transferHost = c.recv(20).decode()
-        if not (new_transferHost == transferHost):
-            print("change")
-            transferSocket.close()
-            transferHost = new_transferHost
-            transferSocket.connect((transferHost, transferPort))
-        print(new_transferHost)
+        result = c.recv(20).decode()
+        if result == "True":
+            target = number
+            print("change target :",target)
 
 def on_press(key):
+    global transferSocket
+    global target
     key = str(key).encode()
-    transferSocket.send(key)
+    transferSocket[target].send(key)
     print(key)
 
 
@@ -48,8 +58,12 @@ def transfer():
 
 if __name__ == '__main__':
     # 连接事件以及释放
-    receiveThread = threading.Thread(target=receive)
-    receiveThread.setDaemon(True)
-    receiveThread.start()
+    receiveThread = [None]*2
+    receiveThread[0] = threading.Thread(target=receive, args = (0,))
+    receiveThread[0].setDaemon(True)
+    receiveThread[0].start()
+    receiveThread[1] = threading.Thread(target=receive, args = (1,))
+    receiveThread[1].setDaemon(True)
+    receiveThread[1].start()
     transfer()
     
