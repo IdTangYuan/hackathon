@@ -15,3 +15,6 @@ keyboard.type('win sublime')
 time.sleep(1)
 keyboard.press(Key.enter)
 keyboard.release(Key.enter)
+
+time.sleep(1)
+keyboard.type('asdadq')
