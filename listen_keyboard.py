@@ -8,14 +8,14 @@ transferHost = "10.64.83.186"
 receivePort = 5051
 transferPort = 5052
 
+receiveSocker = socket.socket()
+receiveSocker.bind((localHost, receivePort))
+receiveSocker.listen(5)
 transferSocket = socket.socket()
 transferSocket.connect((transferHost, transferPort))
 
 
 def receive(port):
-    receiveSocker = socket.socket()
-    receiveSocker.bind((localHost, receivePort))
-    receiveSocker.listen(5)
     while True:
         c, addr = receiveSocker.accept()
         transferHost = receiveSocker.recv(20)
