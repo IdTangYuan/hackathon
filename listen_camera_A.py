@@ -2,13 +2,15 @@ import cv2
 import socket
 from getFaceInfo import *
 filePath = "./catch.jpg"
-host = "10.64.83.186"
-port = 5051
+host = "10.64.83.12"
+port = 5052
 
 
 def checkChangeTarget():
     try:
         faceInfo = getFaceInfo(filePath)
+        if (json.loads(faceInfo)['faces'].__len__() == 0):
+            return False
         leftInfo, rightInfo = getGazeInfo(faceInfo)
         result = isTowards(leftInfo, rightInfo)
         print("Result : ", result)
@@ -34,8 +36,7 @@ if __name__ == '__main__':
             count = 0
             check = checkChangeTarget()
             if check:
-                print("x")
-                s.send(b"10.64.83.186")
+                s.send(b"True")
 
         if(cv2.waitKey(10) & 0xff == ord('q')):
             break

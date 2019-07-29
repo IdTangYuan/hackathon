@@ -1059,6 +1059,8 @@ if __name__ == '__main__':
      "face_num":  1
 }
     """
-    leftInfo, rightInfo = getGazeInfo(FaceInfoCorrect)
+    filePath = "./catch.jpg"
+    faceInfo = getFaceInfo(filePath)
+    leftInfo, rightInfo = getGazeInfo(faceInfo)
     result = isTowards(leftInfo, rightInfo)
     print("Result : ", result)

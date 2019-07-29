@@ -3,8 +3,8 @@ import socket
 import threading
 import re
 
-localHost = "10.64.83.186"
-transferHost = "10.64.83.186"
+localHost = "10.64.83.12"
+transferHost = "10.64.83.12"
 receivePort = 5051
 transferPort = 5053
 
