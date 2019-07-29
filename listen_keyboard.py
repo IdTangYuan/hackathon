@@ -17,8 +17,11 @@ transferSocket.connect((transferHost, transferPort))
 def receive():
     c, addr = receiveSocket.accept()
     while True:
-        transferHost = c.recv(20).decode()
-        print(transferHost)
+        new_transferHost = c.recv(20).decode()
+        if not (new_transferHost == transferHost):
+            print("change")
+            transferHost = new_transferHost
+        print(new_transferHost)
 
 def on_press(key):
     key = str(key).encode()
@@ -46,5 +49,4 @@ if __name__ == '__main__':
     receiveThread.setDaemon(True)
     receiveThread.start()
     transfer()
-    transferSocket.close()  
     
