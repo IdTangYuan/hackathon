@@ -1,6 +1,6 @@
 import socket
 host = "10.64.83.186"
-port = 5051
+port = 5052
 
 if __name__ == '__main__':
     s = socket.socket()

