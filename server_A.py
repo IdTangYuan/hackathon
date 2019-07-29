@@ -8,12 +8,11 @@ if __name__ == '__main__':
     s.bind((host, port))
     s.listen(5)
     c, addr = s.accept()
+    keyboard = Controller()
     while True:
         buf = c.recv(16)
         if buf:
-            print(buf.decode())
-            keyboard.press(buf.decode())
-            keyboard.release(buf.decode())
+            print(buf)
         if(b"esc" in buf):
             break
     s.close()

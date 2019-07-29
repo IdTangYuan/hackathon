@@ -10,10 +10,10 @@ if __name__ == '__main__':
     c, addr = s.accept()
     while True:
         buf = c.recv(16)
-        if buf:
-            print(buf.decode())
-            keyboard.press(buf.decode())
-            keyboard.release(buf.decode())
+        print(buf.decode().__len__())
+        if buf.decode().__len__() == 3:
+            keyboard.press(buf.decode()[1])
+            keyboard.release(buf.decode()[1])
         if(b"esc" in buf):
             break
     s.close()
