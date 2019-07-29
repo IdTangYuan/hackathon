@@ -2,7 +2,7 @@ import cv2
 import socket
 from getFaceInfo import *
 filePath = "./catch.jpg"
-host = "192.168.0.116"
+host = "10.64.83.186"
 port = 5051
 
 
